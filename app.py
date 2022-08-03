@@ -36,14 +36,19 @@ mensagem = f'{saudacao} {texto_msg}'
 
 # função de envio de mensagem, definindo um intervalo de tempo para envio
 def enviarMsg(list, mensagem):
-    while len(lista_contatos) >= 1:
+    while len(list) >= 1:
         pywhatkit.sendwhatmsg(
             list[0], mensagem, 
             datetime.now().hour, 
             datetime.now().minute + 1
         )
-        del lista_contatos[0]
-        time.sleep(30)
+        del list[0]
+        print(f'Restam {len(list)} contatos...')
+        if len(list) == 0:
+            break
+        else:
+            time.sleep(30)
+            keyboard.press_and_release('ctrl+w')
 
 # bloco para confirmar o envio da mensagem
 enviar = str(input("Confirma envio da mensagem? [S - SIM / N - NÃO]\n").upper())
